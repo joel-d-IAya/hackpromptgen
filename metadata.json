@@ -1,0 +1,5 @@
+{
+  "name": "Perfect prompt generator",
+  "description": "An interactive, no-code tool to discover and select the best prompt engineering hacks for various LLMs like ChatGPT, Claude, and Gemini, tailored to specific goals like creativity, rigor, or speed.",
+  "requestFramePermissions": []
+}
