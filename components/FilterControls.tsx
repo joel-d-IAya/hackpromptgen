@@ -1,5 +1,4 @@
-
-import React from 'react';
+import * as React from 'react';
 import type { LLM, Objective } from '../types';
 import type { useTranslations } from '../hooks/useTranslations';
 

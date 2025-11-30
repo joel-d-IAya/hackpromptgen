@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { HackRow } from './HackRow';
 import type { Hack, Language } from '../types';
 import type { useTranslations } from '../hooks/useTranslations';

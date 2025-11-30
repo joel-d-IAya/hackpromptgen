@@ -1,5 +1,5 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Hack, Language } from '../types';
 import type { useTranslations } from '../hooks/useTranslations';
 import { CloseIcon } from './icons/CloseIcon';
@@ -90,8 +90,6 @@ export const HackDetailModal: React.FC<HackDetailModalProps> = ({
     return null;
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-
   const handleGeneratePrompt = async () => {
     if (!userIdea.trim() || !hack) return;
     setIsGenerating(true);
@@ -115,11 +113,12 @@ User's Idea: "${userIdea}"
 Your generated prompt should be the final, polished prompt for the user to copy${isCombined ? ', artfully blending all the requested techniques' : ''}. Do not add any extra explanations, introductions, or quotation marks around the final prompt. Just output the prompt itself.`;
 
     try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: [{ role: 'user', parts: [{ text: metaPrompt }] }],
       });
-      setGeneratedPrompt(response.text);
+      setGeneratedPrompt(response.text || '');
     } catch (error) {
       console.error("Error generating prompt:", error);
       setGenerationError(t('errorGenerating'));
@@ -139,11 +138,12 @@ Comment: "${newComment}"
 Revised Comment:`;
 
       try {
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: [{ role: 'user', parts: [{ text: improvePrompt }] }],
         });
-        setNewComment(response.text);
+        setNewComment(response.text || '');
       } catch (error) {
           console.error("Error improving comment:", error);
           // Optionally, show an error to the user

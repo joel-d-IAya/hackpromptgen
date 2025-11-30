@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import * as React from 'react';
+import { useState, useMemo } from 'react';
 import { Header } from './components/Header';
 import { FilterControls } from './components/FilterControls';
 import { HacksTable } from './components/HacksTable';
